@@ -53,7 +53,7 @@ const fetchSchema = async (url: string, requestInit?: RequestInit) => {
  * @param {InitialState} props.explorer.initialState - Initial state for the embedded explorer.
  * @returns {JSX.Element} The rendered Apollo Embedded Explorer component.
  */
-export const ApolloEmbeddedExplorer = ({
+export const ApolloExplorer = ({
   explorer,
   ...props
 }: {

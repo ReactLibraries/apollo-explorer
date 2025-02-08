@@ -8,6 +8,10 @@ Using ApolloExplorer with React.
 
 https://www.apollographql.com/docs/graphos/platform/explorer/embed#top-level-options
 
+## Sample
+
+https://github.com/SoraKumo001/next-pothos
+
 ## usage
 
 Example of using from AppRouter in Next.js
@@ -17,7 +21,7 @@ Example of using from AppRouter in Next.js
 ```tsx
 import { printSchema } from "graphql";
 import { schema } from "../pothos/schema";
-import { ApolloEmbeddedExplorer } from "apollo-explorer";
+import { ApolloExplorer } from "apollo-explorer";
 
 const document = `query FindManyPost {
   findManyPost {
@@ -35,7 +39,7 @@ const document = `query FindManyPost {
 
 const Page = () => {
   return (
-    <ApolloEmbeddedExplorer
+    <ApolloExplorer
       className="h-screen"
       explorer={{
         endpointUrl: "/graphql",

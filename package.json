@@ -1,6 +1,6 @@
 {
 	"name": "apollo-explorer",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc && tsc --project ./tsconfig.esm.json && cpy esm dist",
@@ -26,5 +26,7 @@
 		"typescript": "5.7.3",
 		"typescript-eslint": "^7.17.0"
 	},
-	"description": "Using ApolloExplorer with React"
+	"description": "Using ApolloExplorer with React",
+	"repository": "https://github.com/ReactLibraries/apollo-explorer",
+	"author": "SoraKumo <info@croud.jp>"
 }
