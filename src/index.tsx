@@ -63,7 +63,7 @@ export const ApolloExplorer = ({
     endpointUrl: string;
     introspectionInterval?: number;
     requestInit?: RequestInit;
-    initialState: InitialState;
+    initialState?: InitialState;
   };
 } & React.HTMLAttributes<HTMLDivElement>) => {
   const {
@@ -92,7 +92,7 @@ export const ApolloExplorer = ({
             persistExplorerState,
             initialState: {
               ...initialState,
-              document: initialState.document ?? "",
+              document: initialState?.document ?? "",
             },
             endpointUrl,
             schema: schema ?? "",

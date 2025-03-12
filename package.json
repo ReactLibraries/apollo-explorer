@@ -1,6 +1,6 @@
 {
 	"name": "apollo-explorer",
-	"version": "0.0.3",
+	"version": "1.0.0",
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc && tsc --project ./tsconfig.esm.json && cpy esm dist",
