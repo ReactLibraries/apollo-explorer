@@ -69,10 +69,10 @@ export const ApolloExplorer = ({
   const {
     persistExplorerState,
     schema,
-    initialState,
     endpointUrl,
     introspectionInterval,
     requestInit,
+    initialState,
   } = explorer;
 
   const ref = useRef<HTMLDivElement>(null);
@@ -87,7 +87,7 @@ export const ApolloExplorer = ({
           "iframe#apollo-embedded-explorer"
         );
         if (!node) {
-          new (globalThis as GlobalThis).EmbeddedExplorer({
+          const explorer = new (globalThis as GlobalThis).EmbeddedExplorer({
             target,
             persistExplorerState,
             initialState: {
@@ -104,6 +104,7 @@ export const ApolloExplorer = ({
       property.isInitialized = true;
       if (typeof (globalThis as GlobalThis).EmbeddedExplorer === "undefined") {
         const script = window.document.createElement("script");
+        script.async = true;
         script.src = explorerUrl;
         script.onload = () => {
           init();

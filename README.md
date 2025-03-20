@@ -2,7 +2,7 @@
 
 ## Overview
 
-Using ApolloExplorer with React.
+Use ApolloExplorer in a back-end that outputs React or HTML.
 
 ## Explanation of options.
 
@@ -12,7 +12,7 @@ https://www.apollographql.com/docs/graphos/platform/explorer/embed#top-level-opt
 
 https://github.com/SoraKumo001/next-pothos
 
-## usage
+## usage(React)
 
 Example of using from AppRouter in Next.js
 
@@ -54,4 +54,23 @@ const Page = () => {
 };
 
 export default Page;
+```
+
+## usage(Hono)
+
+```ts
+import { explorer } from "apollo-explorer/html";
+
+const app = new Hono();
+app.get("/", (c) => {
+  return c.html(
+    explorer({
+      initialState: {
+        document,
+      },
+      endpointUrl: "/",
+      introspectionInterval: 5000,
+    })
+  );
+});
 ```

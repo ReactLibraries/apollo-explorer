@@ -1,32 +1,38 @@
 {
-	"name": "apollo-explorer",
-	"version": "1.0.0",
-	"license": "MIT",
-	"scripts": {
-		"build": "tsc && tsc --project ./tsconfig.esm.json && cpy esm dist",
-		"lint": "eslint --fix ./src",
-		"lint:fix": "eslint --fix ./src"
-	},
-	"main": "./dist/cjs/index.js",
-	"types": "./dist/cjs/index.d.ts",
-	"exports": {
-		"require": "./dist/cjs/index.js",
-		"import": "./dist/esm/index.js"
-	},
-	"dependencies": {
-		"graphql": "16.10.0"
-	},
-	"devDependencies": {
-		"@types/react": "19.0.8",
-		"cpy-cli": "5.0.0",
-		"eslint": "9.8.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-import-resolver-typescript": "^3.6.1",
-		"eslint-plugin-import": "^2.29.1",
-		"typescript": "5.7.3",
-		"typescript-eslint": "^7.17.0"
-	},
-	"description": "Using ApolloExplorer with React",
-	"repository": "https://github.com/ReactLibraries/apollo-explorer",
-	"author": "SoraKumo <info@croud.jp>"
+  "name": "apollo-explorer",
+  "version": "1.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && tsc --project ./tsconfig.esm.json && cpy esm dist",
+    "lint": "eslint --fix ./src",
+    "lint:fix": "eslint --fix ./src"
+  },
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    },
+    "./html": {
+      "require": "./dist/cjs/html.js",
+      "import": "./dist/esm/html.js"
+    }
+  },
+  "dependencies": {
+    "graphql": "16.10.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.8",
+    "cpy-cli": "5.0.0",
+    "eslint": "9.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "typescript": "5.7.3",
+    "typescript-eslint": "^7.17.0"
+  },
+  "description": "Using ApolloExplorer with React",
+  "repository": "https://github.com/ReactLibraries/apollo-explorer",
+  "author": "SoraKumo <info@croud.jp>"
 }
