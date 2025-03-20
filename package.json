@@ -1,6 +1,6 @@
 {
   "name": "apollo-explorer",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "license": "MIT",
   "scripts": {
     "build": "tsc && tsc --project ./tsconfig.esm.json && cpy esm dist",
@@ -11,26 +11,38 @@
   "types": "./dist/cjs/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/cjs/index.d.ts",
       "require": "./dist/cjs/index.js",
       "import": "./dist/esm/index.js"
     },
     "./html": {
-      "require": "./dist/cjs/html.js",
-      "import": "./dist/esm/html.js"
+      "types": "./dist/cjs/html/index.d.ts",
+      "require": "./dist/cjs/html/index.js",
+      "import": "./dist/esm/html/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "html": [
+        "./dist/cjs/html/index.d.ts"
+      ],
+      "*": [
+        "./dist/cjs/index.d.ts"
+      ]
     }
   },
   "dependencies": {
     "graphql": "16.10.0"
   },
   "devDependencies": {
-    "@types/react": "19.0.8",
+    "@types/react": "19.0.12",
     "cpy-cli": "5.0.0",
-    "eslint": "9.8.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.1",
-    "typescript": "5.7.3",
-    "typescript-eslint": "^7.17.0"
+    "eslint": "9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-import-resolver-typescript": "^4.2.2",
+    "eslint-plugin-import": "^2.31.0",
+    "typescript": "5.8.2",
+    "typescript-eslint": "^8.27.0"
   },
   "description": "Using ApolloExplorer with React",
   "repository": "https://github.com/ReactLibraries/apollo-explorer",
