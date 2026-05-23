@@ -1,11 +1,12 @@
 {
   "name": "apollo-explorer",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "license": "MIT",
   "scripts": {
     "build": "tsc && tsc --project ./tsconfig.esm.json && cpy esm dist",
     "lint": "eslint --fix ./src",
-    "lint:fix": "eslint --fix ./src"
+    "lint:fix": "eslint --fix ./src",
+    "test": "node test/test-html-generation.js"
   },
   "main": "./dist/cjs/index.js",
   "types": "./dist/cjs/index.d.ts",
@@ -32,17 +33,18 @@
     }
   },
   "dependencies": {
-    "graphql": "16.10.0"
+    "graphql": "16.11.0"
   },
   "devDependencies": {
-    "@types/react": "19.0.12",
+    "@eslint/js": "9.29.0",
+    "@types/react": "19.1.8",
     "cpy-cli": "5.0.0",
-    "eslint": "9.22.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-import-resolver-typescript": "^4.2.2",
+    "eslint": "9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-import-resolver-typescript": "^4.4.3",
     "eslint-plugin-import": "^2.31.0",
-    "typescript": "5.8.2",
-    "typescript-eslint": "^8.27.0"
+    "typescript": "5.8.3",
+    "typescript-eslint": "^8.34.1"
   },
   "description": "Using ApolloExplorer with React",
   "repository": "https://github.com/ReactLibraries/apollo-explorer",

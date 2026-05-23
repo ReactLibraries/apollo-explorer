@@ -10,7 +10,7 @@ type GlobalThis = typeof globalThis & {
 
 const embedUrl = "https://explorer.embed.apollographql.com";
 const explorerUrl =
-  "https://embeddable-explorer.cdn.apollographql.com/_latest/explorer.umd.production.min.js";
+  "https://embeddable-explorer.cdn.apollographql.com/_latest/embeddable-explorer.umd.production.min.js";
 
 /**
  * Fetches the GraphQL schema from a given URL.

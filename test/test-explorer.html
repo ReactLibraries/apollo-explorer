@@ -1,36 +1,4 @@
-import { printSchema, type GraphQLSchema } from "graphql";
-
-export type InitialState = {
-  document?: string;
-  displayOptions?: {
-    showHeadersAndEnvVars?: boolean;
-    docsPanelState?: "open" | "closed";
-    theme?: "light" | "dark";
-  };
-  headers?: Record<string, string>;
-  variables?: Record<string, string>;
-  collectionId?: string;
-  operationId?: string;
-};
-
-export const explorer = ({
-  persistExplorerState,
-  schema,
-  endpointUrl,
-  introspectionInterval = 0,
-  requestInit = {},
-  initialState = {},
-}: {
-  persistExplorerState?: boolean;
-  schema?: GraphQLSchema;
-  endpointUrl: string;
-  introspectionInterval?: number;
-  requestInit?: RequestInit;
-  initialState?: InitialState;
-}) => {
-  const schemaString =
-    schema && printSchema(schema).replace(/'/g, "\\'").replace(/`/g, "\\`");
-  const html = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -42,10 +10,10 @@ export const explorer = ({
       import { getIntrospectionQuery, buildClientSchema, printSchema } from 'https://cdn.skypack.dev/graphql';
       const explorer = new EmbeddedExplorer({
         target: '#explorer',
-        persistExplorerState: ${persistExplorerState},
-        initialState:${JSON.stringify(initialState)},
-        endpointUrl: '${endpointUrl}',
-        schema: '${schemaString ?? ""}',
+        persistExplorerState: undefined,
+        initialState:{"document":"query GetCountries {\n  countries {\n    code\n    name\n    emoji\n  }\n}"},
+        endpointUrl: 'https://countries.trevorblades.com/graphql',
+        schema: '',
         handleRequest:(url, option) =>
           fetch(url, { ...option, credentials: "same-origin" })
         ,
@@ -70,9 +38,7 @@ export const explorer = ({
             return printSchema(buildClientSchema(data));
         };
       const node = explorer.embeddedExplorerIFrameElement;
-      fetchSchema("${endpointUrl}", ${JSON.stringify(
-    requestInit
-  )}).then((schema) => {
+      fetchSchema("https://countries.trevorblades.com/graphql", {}).then((schema) => {
               node.contentWindow.postMessage({
                       name: "SchemaResponse",
                       schema,
@@ -80,8 +46,8 @@ export const explorer = ({
               }
           );
       };
-      if(${introspectionInterval}){
-        setInterval(requestSchema, ${introspectionInterval});
+      if(0){
+        setInterval(requestSchema, 0);
         window.addEventListener("message", (message) => {
           const {data} = message;
           if(data.name==="ExplorerListeningForSchema"){
@@ -92,6 +58,3 @@ export const explorer = ({
     </script>
   </body>
 </html>
-`;
-  return html;
-};
