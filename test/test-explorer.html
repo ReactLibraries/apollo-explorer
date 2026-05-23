@@ -11,7 +11,7 @@
       const explorer = new EmbeddedExplorer({
         target: '#explorer',
         persistExplorerState: undefined,
-        initialState:{"document":"query GetCountries {\n  countries {\n    code\n    name\n    emoji\n  }\n}"},
+        initialState:{},
         endpointUrl: 'https://countries.trevorblades.com/graphql',
         schema: '',
         handleRequest:(url, option) =>
@@ -46,14 +46,24 @@
               }
           );
       };
+      let isStateSent = false;
+      window.addEventListener("message", (message) => {
+        const {data} = message;
+        if(data.name==="ExplorerListeningForSchema"){
+          requestSchema();
+        }
+        if(data.name==="ExplorerListeningForState" && !isStateSent){
+          isStateSent = true;
+          const node = explorer.embeddedExplorerIFrameElement;
+          node.contentWindow.postMessage({
+            name: "SetOperation",
+            operation: "query GetCountries {\n  countries {\n    code\n    name\n    emoji\n  }\n}",
+            document: "query GetCountries {\n  countries {\n    code\n    name\n    emoji\n  }\n}"
+          }, explorer.getEmbeddedExplorerURL());
+        }
+      });
       if(0){
         setInterval(requestSchema, 0);
-        window.addEventListener("message", (message) => {
-          const {data} = message;
-          if(data.name==="ExplorerListeningForSchema"){
-            requestSchema();
-          }
-        })
       }
     </script>
   </body>

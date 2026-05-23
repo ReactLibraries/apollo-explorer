@@ -30,6 +30,7 @@ export const explorer = ({
 }) => {
   const schemaString =
     schema && printSchema(schema).replace(/'/g, "\\'").replace(/`/g, "\\`");
+  const { document, ...initialStateWithoutDocument } = initialState;
   const html = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,7 +44,7 @@ export const explorer = ({
       const explorer = new EmbeddedExplorer({
         target: '#explorer',
         persistExplorerState: ${persistExplorerState},
-        initialState:${JSON.stringify(initialState)},
+        initialState:${JSON.stringify(initialStateWithoutDocument)},
         endpointUrl: '${endpointUrl}',
         schema: '${schemaString ?? ""}',
         handleRequest:(url, option) =>
@@ -80,14 +81,24 @@ export const explorer = ({
               }
           );
       };
+      let isStateSent = false;
+      window.addEventListener("message", (message) => {
+        const {data} = message;
+        if(data.name==="ExplorerListeningForSchema"){
+          requestSchema();
+        }
+        if(data.name==="ExplorerListeningForState" && !isStateSent){
+          isStateSent = true;
+          const node = explorer.embeddedExplorerIFrameElement;
+          node.contentWindow.postMessage({
+            name: "SetOperation",
+            operation: ${JSON.stringify(document ?? "")},
+            document: ${JSON.stringify(document ?? "")}
+          }, explorer.getEmbeddedExplorerURL());
+        }
+      });
       if(${introspectionInterval}){
         setInterval(requestSchema, ${introspectionInterval});
-        window.addEventListener("message", (message) => {
-          const {data} = message;
-          if(data.name==="ExplorerListeningForSchema"){
-            requestSchema();
-          }
-        })
       }
     </script>
   </body>
